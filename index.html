@@ -792,11 +792,15 @@
                     // 성공 메시지
                     resultDiv.className = 'submit-result success';
                     resultDiv.innerHTML = `
-                        <h4>✅ 요청사항이 성공적으로 전송되었습니다!</h4>
-                        <p>피드백 ID: ${data.data.feedback_id}</p>
-                        <p>빠른 시일 내에 검토 후 처리해드리겠습니다.</p>
+                        <h4>✅ 요청사항이 성공적으로 전송되었습니다</h4>
                     `;
                     resultDiv.style.display = 'block';
+                    
+                    // 폼 닫기
+                    const formContainer = document.getElementById('feedbackFormContainer');
+                    const button = document.querySelector('.feedback-button');
+                    formContainer.classList.remove('active');
+                    button.innerHTML = '<span class="emoji">✏️</span> 수정사항/요청사항 작성하기';
                     
                     // 폼 초기화
                     form.reset();
