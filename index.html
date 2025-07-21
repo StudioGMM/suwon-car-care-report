@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수원카케어 네이버 스마트플레이스 예약 서비스 등록 완료 보고서</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        .meta-info {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .meta-info strong {
+            color: #2980b9;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            border-left: 4px solid #3498db;
+            padding-left: 12px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .service-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .service-title {
+            color: #2980b9;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .service-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        details {
+            margin-top: 15px;
+        }
+
+        summary {
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        summary:hover {
+            background-color: #2980b9;
+        }
+
+        .details-content {
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .details-section {
+            margin-bottom: 20px;
+        }
+
+        .details-section h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+
+        .details-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .details-section li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: #f39c12;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .completed-badge {
+            background-color: #27ae60;
+        }
+
+        .highlight-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .completion-message {
+            text-align: center;
+            background-color: #d5edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .feedback-section {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .feedback-button {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .feedback-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-button.secondary {
+            background-color: #6c757d;
+        }
+
+        .feedback-button.secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .feedback-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .feedback-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .copy-button {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .copy-button:hover {
+            background-color: #138496;
+        }
+
+        .copy-success {
+            color: #28a745;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            .service-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .submit-result.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .submit-result.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .feedback-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .feedback-form.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="emoji">🚗</span> 수원카케어 네이버 스마트플레이스 예약 서비스 등록 완료 보고서</h1>
+        
+        <div class="meta-info">
+            <strong>작업 완료일</strong>: 2025년 7월 21일<br>
+            <strong>현재 상태</strong>: <span class="status-badge">네이버 검수 진행 중</span>
+        </div>
+
+        <h2><span class="emoji">📋</span> 작업 개요</h2>
+        <p>수원카케어의 네이버 스마트플레이스에 4개의 예약 서비스를 등록하였습니다.</p>
+
+        <h2><span class="emoji">✅</span> 등록된 예약 서비스 구성</h2>
+
+        <div class="service-card">
+            <div class="service-title">1️⃣ 기본세차 (Basic Wash)</div>
+            <div class="service-description">30일 정도의 세차 주기를 유지하며 차량을 관리하고자 하는 분들께 추천드립니다.</div>
+            
+            <details>
+                <summary><strong>📋 상세정보 보기</strong></summary>
+                <div class="details-content">
+                    <div class="details-section">
+                        <h4>상세정보</h4>
+                        <ul>
+                            <li>도장면 보호를 위한 2단계 전처리 과정</li>
+                            <li>전용 클리닝제 마이크로파이버 타월 사용</li>
+                            <li>휠, 타이어 전문관리</li>
+                            <li>내부 스팀세차 및 대시보드 집중 케어</li>
+                            <li>1시간 완성 (중형차 기준)</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>실내 관리</h4>
+                        <ul>
+                            <li>바닥 매트 클리닝 및 건조</li>
+                            <li>실내 이물질 제거 (진공청소)</li>
+                            <li>시트 표면 클리닝 및 소독</li>
+                            <li>대시보드, 도어트림, 센터콘솔 전면 케어</li>
+                            <li>컵홀더, 송풍구 등 세부 부위 정리</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>외부 관리</h4>
+                        <ul>
+                            <li>차체 전면 스팀 세척 및 오염 제거</li>
+                            <li>휠 전용 클리너로 브레이크 더스트 제거</li>
+                            <li>타이어 사이드월 및 휠 아치 정리</li>
+                            <li>도어 몰딩, 범퍼 틈새 세부 청소</li>
+                            <li>번호판, 엠블럼 주변 꼼꼼한 관리</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>마무리</h4>
+                        <ul>
+                            <li>워터 스팟 방지 완전 건조</li>
+                            <li>타이어 글로스 처리로 깔끔한 마감</li>
+                            <li>실내 항균 처리 및 냄새 제거</li>
+                            <li>최종 점검 및 고객 확인</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic; color: #666;">차량손상은 최소화하며 기본기에 충실한 서비스입니다.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="service-card">
+            <div class="service-title">2️⃣ 스페셜세차1 (Special Wash 1)</div>
+            <div class="service-description">기본세차 + 도장면 발수코팅으로 업그레이드된 서비스입니다. 차체 전면 발수 효과로 오염 방지와 광택 유지를 원하시는 분들께 추천드립니다.</div>
+            
+            <details>
+                <summary><strong>📋 상세정보 보기</strong></summary>
+                <div class="details-content">
+                    <div class="details-section">
+                        <h4>상세정보</h4>
+                        <ul>
+                            <li>도장면 보호를 위한 2단계 전처리 과정</li>
+                            <li>전용 클리닝제 마이크로파이버 타월 사용</li>
+                            <li>철분제거로 도장면 철분 완전 제거</li>
+                            <li>내부 스팀세차 및 대시보드 집중 케어</li>
+                            <li>차체 전면 발수코팅으로 오염 방지 효과</li>
+                            <li>1.5시간 완성 (중형차 기준)</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>실내 관리</h4>
+                        <ul>
+                            <li>바닥 매트 클리닝 및 건조</li>
+                            <li>실내 이물질 제거 (진공청소)</li>
+                            <li>시트 표면 클리닝 및 소독</li>
+                            <li>대시보드, 도어트림, 센터콘솔 전면 케어</li>
+                            <li>컵홀더, 송풍구 등 세부 부위 정리</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>외부 관리</h4>
+                        <ul>
+                            <li>차체 전면 스팀 세척 및 오염 제거</li>
+                            <li>철분제거 전용제로 철분 오염물질 완전 제거</li>
+                            <li>휠 전용 클리너로 브레이크 더스트 제거</li>
+                            <li>타이어 사이드월 및 휠 아치 정리</li>
+                            <li>도어 몰딩, 범퍼 틈새 세부 청소</li>
+                            <li>번호판, 엠블럼 주변 꼼꼼한 관리</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>마무리</h4>
+                        <ul>
+                            <li>워터 스팟 방지 완전 건조</li>
+                            <li>차체 전면 발수코팅 시공 (물방울 효과)</li>
+                            <li>코팅제로 광택 및 오염 방지 효과 극대화</li>
+                            <li>최종 점검 및 고객 확인</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic; color: #666;">차량손상은 최소화하며 기본기에 충실한 서비스입니다.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="service-card">
+            <div class="service-title">3️⃣ 스페셜세차2 (Special Wash 2)</div>
+            <div class="service-description">기본세차 + 시트보호제 & 실내살균소독으로 업그레이드된 관리 서비스입니다. 실내 위생과 시트 보호를 중시하시는 분들께 추천드립니다.</div>
+            
+            <details>
+                <summary><strong>📋 상세정보 보기</strong></summary>
+                <div class="details-content">
+                    <div class="details-section">
+                        <h4>상세정보</h4>
+                        <ul>
+                            <li>도장면 보호를 위한 2단계 전처리 과정</li>
+                            <li>전용 클리닝제 마이크로파이버 타월 사용</li>
+                            <li>휠, 타이어 전문관리</li>
+                            <li>내부 스팀세차 및 대시보드 집중 케어</li>
+                            <li>시트보호제 + 실내살균소독 시공</li>
+                            <li>1.5시간 완성 (중형차 기준)</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>실내 관리</h4>
+                        <ul>
+                            <li>바닥 매트 클리닝 및 건조</li>
+                            <li>실내 이물질 제거 (진공청소)</li>
+                            <li>시트 + 내장재 세정</li>
+                            <li>시트보호제 시공으로 오염 방지</li>
+                            <li>실내 살균소독으로 위생 관리</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>외부 관리</h4>
+                        <ul>
+                            <li>차체 전면 스팀 세척 및 오염 제거</li>
+                            <li>휠 전용 클리너로 브레이크 더스트 제거</li>
+                            <li>타이어 사이드월 및 휠 아치 정리</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>마무리</h4>
+                        <ul>
+                            <li>워터 스팟 방지 완전 건조</li>
+                            <li>유리 클리닝으로 깔끔한 시야</li>
+                            <li>타이어 글로스 처리</li>
+                            <li>최종 점검 및 고객 확인</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic; color: #666;">차량손상은 최소화하며 기본기에 충실한 서비스입니다.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="service-card">
+            <div class="service-title">4️⃣ 프리미엄세차 (Premium Wash)</div>
+            <div class="service-description">기본세차에 시트보호제, 실내살균소독, 철분/타르제거, 유리막코팅관리제, 휠디테일클리닝이 모두 포함된 최고급 토탈케어 서비스입니다. 완벽한 차량 관리를 원하시는 분들께 추천드립니다.</div>
+            
+            <details>
+                <summary><strong>📋 상세정보 보기</strong></summary>
+                <div class="details-content">
+                    <div class="details-section">
+                        <h4>상세정보</h4>
+                        <ul>
+                            <li>도장면 보호를 위한 2단계 전처리 과정</li>
+                            <li>전용 클리닝제 마이크로파이버 타월 사용</li>
+                            <li>휠, 타이어 전문관리 + 휠디테일클리닝</li>
+                            <li>철분/타르제거로 강력 오염 완전 제거</li>
+                            <li>내부 스팀세차 + 시트보호제 + 실내살균소독</li>
+                            <li>유리막코팅관리제로 최고급 마감</li>
+                            <li>1시간 30분 완성 (중형차 기준)</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>실내 관리</h4>
+                        <ul>
+                            <li>바닥 매트 클리닝 및 건조</li>
+                            <li>실내 이물질 제거 (진공청소)</li>
+                            <li>시트 + 내장재 세정</li>
+                            <li>시트보호제 시공으로 오염 방지</li>
+                            <li>실내 살균소독으로 위생 관리</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>외부 관리</h4>
+                        <ul>
+                            <li>차체 전면 스팀 세척 및 오염 제거</li>
+                            <li>철분/타르제거로 강력 오염물질 완전 제거</li>
+                            <li>휠 전용 클리너로 브레이크 더스트 제거</li>
+                            <li>타이어 사이드월 및 휠 아치 정리</li>
+                            <li>휠 디테일 클리닝으로 완벽 마감</li>
+                        </ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>마무리</h4>
+                        <ul>
+                            <li>워터 스팟 방지 완전 건조</li>
+                            <li>유리막코팅관리제로 발수 효과 극대화</li>
+                            <li>유리 클리닝으로 깔끔한 시야</li>
+                            <li>타이어 글로스 처리</li>
+                            <li>최종 점검 및 고객 확인</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic; color: #666;">차량손상은 최소화하며 기본기에 충실한 서비스입니다.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <h2><span class="emoji">🎯</span> 주요 적용 사항</h2>
+        <div class="highlight-box">
+            <strong>기본세차 타겟팅</strong>: 기본세차에 "30일 주기" 고객을 명시함으로써, 상위 서비스를 선택하도록 유도하는 업셀링 구조를 적용.
+        </div>
+
+        <h2><span class="emoji">📱</span> 네이버 스마트플레이스 설정 완료 사항</h2>
+
+        <h3>✅ 예약 시간 설정</h3>
+        <ul>
+            <li><strong>운영시간</strong>: 오전 10시 ~ 오후 7시</li>
+            <li><strong>예약 단위</strong>: 1시간 단위로 예약 가능</li>
+            <li><strong>예약 간격</strong>: 각 서비스별 소요시간에 맞춰 설정</li>
+        </ul>
+
+        <h3>✅ 예약 확정 시 안내 메시지</h3>
+        <p>예약 확정 후 고객에게 발송되는 안내 메시지를 구성하여, 방문 시간, 준비사항, 연락처 등 필요한 정보를 자동으로 안내하도록 설정하였습니다.</p>
+        <p style="margin-top: 10px; font-style: italic; color: #666;">*예약 시간, 예약 확정 시 안내 메시지 등은 임의 설정하였으며, 추가 수정사항 및 방향 있으면 말씀해주세요.</p>
+
+        <h2><span class="emoji">🔄</span> 현재 진행 상황</h2>
+
+        <h3>네이버 검수 단계</h3>
+        <ul>
+            <li><strong>상태</strong>: 검수 진행 중</li>
+            <li><strong>예상 소요기간</strong>: 1-3일 (네이버 내부 검토)</li>
+            <li><strong>검수 완료 후</strong>: 즉시 예약 접수 가능</li>
+        </ul>
+
+        <div class="completion-message">
+            <span class="emoji">✨</span> 네이버 스마트플레이스 예약 서비스 등록이 완료되었습니다!<br>
+            검수 완료 즉시 고객들이 온라인으로 예약할 수 있게 됩니다.
+        </div>
+
+        <div class="feedback-section">
+            <h2><span class="emoji">💬</span> 피드백 및 수정 요청</h2>
+            <p>보고서 내용에 대한 수정사항이나 추가 요청사항이 있으시면 아래 버튼을 클릭해주세요.</p>
+            
+            <div id="serverStatusMessage" style="text-align: center; margin: 20px 0; display: none;">
+                <div style="padding: 20px; background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <span class="emoji">💤</span> <strong>피드백 서비스 일시 중단</strong><br>
+                    <p style="margin: 10px 0; line-height: 1.5;">현재 피드백 접수 시스템 점검 중입니다.<br>
+                    불편을 드려 죄송하며, 곧 정상 서비스로 복구될 예정입니다.</p>
+                    <small style="opacity: 0.8;">📞 급한 문의사항은 직접 연락 부탁드립니다.</small>
+                </div>
+            </div>
+            
+            <div id="feedbackButtonContainer" style="text-align: center; margin: 20px 0; display: none;">
+                <button class="feedback-button" onclick="toggleFeedbackForm()">
+                    <span class="emoji">✏️</span> 수정사항/요청사항 작성하기
+                </button>
+            </div>
+            
+            <div class="feedback-form" id="feedbackFormContainer">
+                <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                    <div class="form-group">
+                        <label for="inquiryType">📋 문의 유형</label>
+                        <select id="inquiryType" name="inquiryType" required>
+                            <option value="">문의 유형을 선택해주세요</option>
+                            <option value="수정요청">수정요청 - 기존 내용 변경</option>
+                            <option value="추가요청">추가요청 - 새로운 기능/내용 추가</option>
+                            <option value="질문">질문 - 문의사항</option>
+                            <option value="기타">기타 - 분류되지 않는 요청</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackContent">✏️ 요청 내용</label>
+                        <textarea id="feedbackContent" name="feedbackContent" rows="6" 
+                                  placeholder="구체적인 수정사항이나 요청사항을 작성해주세요." 
+                                  required></textarea>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="feedback-button">
+                            <span class="emoji">📤</span> 요청사항 보내기
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="submitResult" class="submit-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 서버 상태 확인
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServerStatus();
+        });
+
+        function checkServerStatus() {
+            const serverStatusMessage = document.getElementById('serverStatusMessage');
+            const feedbackButtonContainer = document.getElementById('feedbackButtonContainer');
+            
+            // 서버 헬스체크 요청
+            fetch('http://localhost:8080/health', {
+                method: 'GET',
+                timeout: 5000 // 5초 타임아웃
+            })
+            .then(response => {
+                if (response.ok) {
+                    // 서버 정상 - 피드백 버튼 표시
+                    serverStatusMessage.style.display = 'none';
+                    feedbackButtonContainer.style.display = 'block';
+                } else {
+                    throw new Error('Server not responding');
+                }
+            })
+            .catch(error => {
+                // 서버 연결 실패 - 경고 메시지 표시
+                serverStatusMessage.style.display = 'block';
+                feedbackButtonContainer.style.display = 'none';
+                console.log('Server health check failed:', error);
+            });
+        }
+
+        function toggleFeedbackForm() {
+            const formContainer = document.getElementById('feedbackFormContainer');
+            const button = document.querySelector('.feedback-button');
+            
+            if (formContainer.classList.contains('active')) {
+                formContainer.classList.remove('active');
+                button.innerHTML = '<span class="emoji">✏️</span> 수정사항/요청사항 작성하기';
+            } else {
+                formContainer.classList.add('active');
+                button.innerHTML = '<span class="emoji">📝</span> 작성 폼 닫기';
+            }
+        }
+
+        function submitFeedback(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('feedbackForm');
+            const resultDiv = document.getElementById('submitResult');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // 폼 데이터 수집
+            const formData = new FormData(form);
+            const inquiryType = formData.get('inquiryType');
+            const feedbackContent = formData.get('feedbackContent');
+            
+            // 버튼 상태 변경
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="emoji">⏳</span> 전송 중...';
+            
+            // FEEDBACK SERVER로 데이터 전송
+            const feedbackData = {
+                client_id: 'suwon-carcare',
+                type: inquiryType,
+                message: feedbackContent,
+                contact: '웹 폼을 통한 요청',
+                project_name: '네이버 스마트플레이스 예약'
+            };
+            
+            fetch('http://localhost:8080/api/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(feedbackData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 성공 메시지
+                    resultDiv.className = 'submit-result success';
+                    resultDiv.innerHTML = `
+                        <h4>✅ 요청사항이 성공적으로 전송되었습니다!</h4>
+                        <p>피드백 ID: ${data.data.feedback_id}</p>
+                        <p>빠른 시일 내에 검토 후 처리해드리겠습니다.</p>
+                    `;
+                    resultDiv.style.display = 'block';
+                    
+                    // 폼 초기화
+                    form.reset();
+                } else {
+                    throw new Error(data.error || '전송 실패');
+                }
+            })
+            .catch(error => {
+                // 에러 메시지
+                resultDiv.className = 'submit-result error';
+                resultDiv.innerHTML = `
+                    <h4>❌ 전송 중 오류가 발생했습니다</h4>
+                    <p>오류 내용: ${error.message}</p>
+                    <p>잠시 후 다시 시도해주세요.</p>
+                `;
+                resultDiv.style.display = 'block';
+            })
+            .finally(() => {
+                // 버튼 상태 복원
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<span class="emoji">📤</span> 요청사항 보내기';
+            });
+        }
+    </script>
+</body>
+</html>
